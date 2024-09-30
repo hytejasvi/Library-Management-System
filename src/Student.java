@@ -26,4 +26,23 @@ public class Student extends User {
     public List<Book> myBorrowedBooks() {
         return borrowedBooks;
     }
+
+    public void returnBook(String title) {
+        Book bookToReturn = null;
+        for (Book book : borrowedBooks) {
+            if (book.getTitle().equals(title)) {
+                bookToReturn = book;
+                break;
+            }
+        }
+
+        if (bookToReturn != null) {
+            bookToReturn.setAvailable(true);
+            borrowedBooks.remove(bookToReturn);
+            System.out.println("Book '" + title + "' has been returned successfully.");
+        } else {
+            System.out.println("You haven't borrowed the book '" + title + "'.");
+        }
+    }
+
 }

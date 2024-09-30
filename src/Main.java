@@ -17,11 +17,17 @@ public class Main {
 
         // Student borrows a book
         s1.borrowBook("The Secret");
+        s1.borrowBook("Clean Code");
 
         // Display all books after borrowing
         System.out.println(lib.getAllBooks());
 
         // Display borrowed books by the student
+        System.out.println("my borrowed books are : ");
+        System.out.println(s1.myBorrowedBooks());
+
+        s1.returnBook("Clean Code");
+        System.out.println("my borrowed books are : ");
         System.out.println(s1.myBorrowedBooks());
     }
 }
