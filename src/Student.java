@@ -12,15 +12,24 @@ public class Student extends User {
     }
 
     public void borrowBook(String title) {
-        Book b = Library.getInstance().searchBook(title);
-        if (b != null && b.isAvailable()) {
-            System.out.println("Borrowed the book: ");
-            System.out.println(b);
-            b.setAvailable(false);
-            borrowedBooks.add(b);
+        if (isBorrowingAllowed()) {
+            Book b = Library.getInstance().searchBook(title);
+            if (b != null && b.isAvailable()) {
+                System.out.println("Borrowed the book: ");
+                System.out.println(b);
+                b.setAvailable(false);
+                borrowedBooks.add(b);
+            } else {
+                System.out.println("Book unavailable for borrowing.");
+            }
         } else {
-            System.out.println("Book unavailable for borrowing.");
+            System.out.println("You already have " + borrowedBooks.size() + " books borrowed. " +
+                    "A student can only borrow 3 books at a time. Please return some books to borrow again.");
         }
+    }
+
+    private boolean isBorrowingAllowed() {
+        return this.borrowedBooks.size() < 3;
     }
 
     public List<Book> myBorrowedBooks() {
